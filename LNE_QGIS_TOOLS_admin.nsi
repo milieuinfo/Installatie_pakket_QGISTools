@@ -22,6 +22,9 @@
   ;Request application privileges
   RequestExecutionLevel user
 
+  !define APPNAME "LNE QGIS Tools"
+  !define COMPANYNAME "LNE"
+  
 ;--------------------------------
 ;Interface Settings
 
@@ -39,9 +42,9 @@
   !insertmacro MUI_UNPAGE_CONFIRM
   !insertmacro MUI_UNPAGE_INSTFILES
   
-;--------------------------------
-;Languages
- 
+  RequestExecutionLevel user
+
+  ;Languages
   !insertmacro MUI_LANGUAGE "Dutch"
 
 ;--------------------------------
@@ -51,11 +54,14 @@ SectionGroup /e "QGIS-Plugins"
 
 Section ;always executed, is hidden for user
 
-  ;Store installation folder
-  WriteRegStr HKCU "Software\LNE_QGIS_tools" "" $INSTDIR
-  ;Create uninstaller
-  WriteUninstaller "$INSTDIR\Uninstall.exe"
+ ;Store installation folder
+ WriteRegStr HKCU "Software\LNE_QGIS_tools" "" $INSTDIR
+ ;Create uninstaller
+ WriteUninstaller "$INSTDIR\Uninstall.exe"
 
+ ; WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} ${APPNAME}" "DisplayName" "QGIS-tools voor LNE" 
+ ; WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} ${APPNAME}" "UninstallString" "$\"$INSTDIR\Uninstall.exe$\""
+  
 SectionEnd
 
 Section "QLR-loader" qlrLoader
@@ -74,6 +80,14 @@ Section "Stijl laden" styleLoad
 
 SectionEnd
 
+Section /o "Spatial Subset Query Tool" SpatialSubset
+
+  SetOutPath "$INSTDIR\Spatial-Subset-Query-Tool"
+
+  File /r "inputs\Spatial-Subset-Query-Tool\*"
+
+SectionEnd
+
 SectionGroupEnd
 
 ;Descriptions
@@ -82,6 +96,7 @@ SectionGroupEnd
   !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
     !insertmacro MUI_DESCRIPTION_TEXT ${qlrLoader} "Een tool om QLR-files te laden via een knop op de toolbalk."
     !insertmacro MUI_DESCRIPTION_TEXT ${styleLoad} "Een tool om QML-files te laden een dockvenster."
+	!insertmacro MUI_DESCRIPTION_TEXT ${SpatialSubset} "Enkel nuttig voor Postgis gebruikers. Een tool om een van een postgis databank een specifieke subset laden op basis van de intersectie met een andere laag."
   !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 ;--------------------------------
@@ -96,12 +111,16 @@ Section "Uninstall"
   ${If} ${FileExists} "$INSTDIR\styleLoad\*.*"
 	RMDir /r "$INSTDIR\styleLoad"
   ${EndIf}
-
+  ${If} ${FileExists} "$INSTDIR\Spatial-Subset-Query-Tool\*.*"
+	RMDir /r "$INSTDIR\Spatial-Subset-Query-Tool"
+  ${EndIf}
+  
   ;Delete the uninstaller and uninstall directory
   Delete "$INSTDIR\Uninstall.exe"
 
   RMDir "$INSTDIR"
 
   DeleteRegKey /ifempty HKCU "Software\LNE_QGIS_tools"
+  ;DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} ${APPNAME}"
 
 SectionEnd

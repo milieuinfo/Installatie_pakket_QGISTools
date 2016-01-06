@@ -29,10 +29,8 @@
   !insertmacro MUI_PAGE_COMPONENTS
   !insertmacro MUI_PAGE_INSTFILES
   !insertmacro MUI_PAGE_FINISH
-  
-;--------------------------------
-;Languages
- 
+
+  ;Languages
   !insertmacro MUI_LANGUAGE "Dutch"
 
 ;--------------------------------
@@ -61,12 +59,21 @@ Section "Stijl laden" styleLoad
 
 SectionEnd
 
+Section /o "Spatial Subset Query Tool" SpatialSubset
+
+  SetOutPath "$INSTDIR\Spatial-Subset-Query-Tool"
+
+  File /r "inputs\Spatial-Subset-Query-Tool\*"
+
+SectionEnd
+
 SectionGroupEnd
 
 ;Descriptions
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
 	!insertmacro MUI_DESCRIPTION_TEXT ${qlrLoader} "Een tool om QLR-files te laden via een knop op de toolbalk."
 	!insertmacro MUI_DESCRIPTION_TEXT ${styleLoad} "Een tool om QML-files te laden een dockvenster."
+	!insertmacro MUI_DESCRIPTION_TEXT ${SpatialSubset} "Enkel nuttig voor Postgis gebruikers. Een tool om een van een postgis databank een specifieke subset laden op basis van de intersectie met een andere laag."
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 ;--------------------------------
