@@ -20,10 +20,10 @@
 ;Interface Settings
 
   !define MUI_ABORTWARNING
-  !define MUI_ICON "icon.ico"
+  !define MUI_ICON "LNE_icon.ico"
   !define MUI_WELCOMEFINISHPAGE_BITMAP "Panel.bmp" 
   !define MUI_WELCOMEPAGE_TITLE "QGIS-tools voor LNE" 
-  !define MUI_WELCOMEPAGE_TEXT "De QGIS-tools voor LNE zijn een reeks plugins voor QGIS. Ze zijn speciefiek ontwikkeld voor de gebruikers van LNE aan de hand van hun vragen en behoeften.  Met deze tool kan je deze tools installeren, op je eigen gebruikersprofiel"
+  !define MUI_WELCOMEPAGE_TEXT "De QGIS-tools voor LNE zijn een reeks plugins voor QGIS. Ze zijn speciefiek ontwikkeld voor de gebruikers van LNE aan de hand van hun vragen en behoeften.  Met deze tool kan je deze tools installeren, lokaal op je eigen gebruikersprofiel of globaal voor alle gebruikers van je PC."
   !insertmacro MUI_PAGE_WELCOME
   !insertmacro MUI_PAGE_LICENSE "gpl.txt"
   
