@@ -1,12 +1,11 @@
 ;NSIS Script to create the installation package to deploy QGIS-tools for LNE
 ;Written by Kay Warrie
-
-;--------------------------------
-;Include Modern UI
-
+   Var pluginDir
+;Includes
   !include "MUI2.nsh"
+  !include "QGISinstalledUI.nsdinc"
+  !include "QGISinstalled_callback.nsh"
 
-;--------------------------------
 ;General
 
   ;Name and file
@@ -22,7 +21,7 @@
   ;Request application privileges
   RequestExecutionLevel user
 
-  !define APPNAME "LNE QGIS Tools"
+  !define APPNAME "LNE_QGIS_Tools"
   !define COMPANYNAME "LNE"
   
 ;--------------------------------
@@ -34,7 +33,10 @@
   !define MUI_WELCOMEPAGE_TITLE "QGIS-tools voor LNE" 
   !define MUI_WELCOMEPAGE_TEXT "De QGIS-tools voor LNE zijn een reeks plugins voor QGIS. Ze zijn speciefiek ontwikkeld voor de gebruikers van LNE aan de hand van hun vragen en behoeften.  Met deze tool kan je deze tools installeren, op je eigen gebruikersprofiel"
   !insertmacro MUI_PAGE_WELCOME
-  !insertmacro MUI_PAGE_LICENSE "gpl.txt"
+  !insertmacro MUI_PAGE_LICENSE "gpl.txt"  
+  
+  Page custom fnc_QGISinstalledUI_Show
+  
   !insertmacro MUI_PAGE_COMPONENTS
   !insertmacro MUI_PAGE_INSTFILES
   !insertmacro MUI_PAGE_FINISH
@@ -53,21 +55,27 @@
 SectionGroup /e "QGIS-Plugins"
 
 Section ;always executed, is hidden for user
-
+ ;set installdir to plugins
+ StrCpy $INSTDIR $pluginDir
  ;Store installation folder
  WriteRegStr HKCU "Software\LNE_QGIS_tools" "" $INSTDIR
  ;Create uninstaller
- WriteUninstaller "$INSTDIR\Uninstall.exe"
-
- ; WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} ${APPNAME}" "DisplayName" "QGIS-tools voor LNE" 
- ; WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} ${APPNAME}" "UninstallString" "$\"$INSTDIR\Uninstall.exe$\""
-  
+ WriteUninstaller "$pluginDir\LNE_Uninstall.exe"
+ ;Add icon
+ SetOutPath $INSTDIR
+ File "LNE_icon.ico"
+ 
+ WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME}_${APPNAME}" "DisplayName" "QGIS-tools voor LNE"
+ WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME}_${APPNAME}" "DisplayIcon" "$INSTDIR\LNE_icon.ico"
+ WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME}_${APPNAME}" "UninstallString" "$\"$INSTDIR\LNE_Uninstall.exe$\""
+ WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME}_${APPNAME}" "HelpLink" "https://github.com/milieuinfo/Installatie_pakket_QGISTools"
+ WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME}_${APPNAME}" "Publisher" ${COMPANYNAME}
+ 
 SectionEnd
 
 Section "QLR-loader" qlrLoader
 
   SetOutPath "$INSTDIR\qlrLoader"
-
   File /r "inputs\qlrLoader\*"
 
 SectionEnd
@@ -75,7 +83,6 @@ SectionEnd
 Section "Stijl laden" styleLoad
 
   SetOutPath "$INSTDIR\styleLoad"
-
   File /r "inputs\styleLoad\*"
 
 SectionEnd
@@ -83,7 +90,6 @@ SectionEnd
 Section /o "Spatial Subset Query Tool" SpatialSubset
 
   SetOutPath "$INSTDIR\Spatial-Subset-Query-Tool"
-
   File /r "inputs\Spatial-Subset-Query-Tool\*"
 
 SectionEnd
@@ -116,11 +122,10 @@ Section "Uninstall"
   ${EndIf}
   
   ;Delete the uninstaller and uninstall directory
-  Delete "$INSTDIR\Uninstall.exe"
-
-  RMDir "$INSTDIR"
+  Delete "$INSTDIR\LNE_Uninstall.exe"
+  Delete "$INSTDIR\LNE_icon.ico"
 
   DeleteRegKey /ifempty HKCU "Software\LNE_QGIS_tools"
-  ;DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} ${APPNAME}"
+  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME}_${APPNAME}"
 
 SectionEnd

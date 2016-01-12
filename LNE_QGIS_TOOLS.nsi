@@ -1,14 +1,15 @@
 ;NSIS Script to create the installation package to deploy QGIS-tools for LNE
 ;Written by Kay Warrie
-
-;--------------------------------
-;Include Modern UI
-
+   Var pluginDir
+   
+;Includes
   !include "MUI2.nsh"
+  !include "LogicLib.nsh"
+  
+  !include "QGISinstalledUI.nsdinc"
+  !include "QGISinstalled_callback.nsh"
 
-;--------------------------------
 ;General
-
   ;Name and file
   Name "LNE QGIS Tools"
   OutFile "build\LNE_QGIS_tools.exe"
@@ -16,7 +17,6 @@
   ;Default installation folder
   InstallDir "$PROFILE\.qgis2\python\plugins"
 
-;--------------------------------
 ;Interface Settings
 
   !define MUI_ABORTWARNING
@@ -26,20 +26,23 @@
   !define MUI_WELCOMEPAGE_TEXT "De QGIS-tools voor LNE zijn een reeks plugins voor QGIS. Ze zijn speciefiek ontwikkeld voor de gebruikers van LNE aan de hand van hun vragen en behoeften.  Met deze tool kan je deze tools installeren, op je eigen gebruikersprofiel"
   !insertmacro MUI_PAGE_WELCOME
   !insertmacro MUI_PAGE_LICENSE "gpl.txt"
+  
+  Page custom fnc_QGISinstalledUI_Show
+  
   !insertmacro MUI_PAGE_COMPONENTS
   !insertmacro MUI_PAGE_INSTFILES
   !insertmacro MUI_PAGE_FINISH
 
   ;Languages
   !insertmacro MUI_LANGUAGE "Dutch"
-
-;--------------------------------
+ 
 ;Installer Sections
 
 SectionGroup /e "QGIS-Plugins"
 
 Section ;always executed, is hidden for user
-	;Add stuff that should be hidden from user here
+    ;set installdir to plugins
+	StrCpy $INSTDIR $pluginDir
 
 SectionEnd
 

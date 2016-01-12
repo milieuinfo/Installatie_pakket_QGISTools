@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file was created by NSISDialogDesigner 1.4.0.0
+http://coolsoft.altervista.org/nsisdialogdesigner
+Do not edit manually!
+-->
+<Dialog Name="QGISinstalledUI" Title="Kies type van installatie" Subtitle="Kies wie de tool zal gebruiken">
+  <GroupBox Name="typeOfInstallBox" Location="12, 32" Size="426, 165" Text="Type van installatie" TabIndex="0">
+    <Label Name="Label1" Location="6, 120" Size="66, 16" Text="Doel Folder:" TabIndex="0" />
+    <TextBox Name="installDirText" Location="6, 139" Size="414, 20" ReadOnly="True" TabIndex="1">
+      <ControlCustomScript>${NSD_SetText} $hCtl_QGISinstalledUI_installDirText  $pluginDir</ControlCustomScript>
+    </TextBox>
+    <RadioButton Name="localCbx" Location="6, 19" Size="296, 37" Text="Installeer alleen voor mij" Checked="True" TabIndex="2" onClick="setInstallDirLocal" />
+    <RadioButton Name="globalCbx" Location="6, 62" Size="296, 38" Text="Probeer te installeren voor alle gebruikers" TabIndex="3" onClick="setInstallDirGlobal" />
+  </GroupBox>
+</Dialog>
