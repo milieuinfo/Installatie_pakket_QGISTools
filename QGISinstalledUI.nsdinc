@@ -8,6 +8,7 @@
 ; handle variables
 Var hCtl_QGISinstalledUI
 Var hCtl_QGISinstalledUI_typeOfInstallBox
+Var hCtl_QGISinstalledUI_manualCbx
 Var hCtl_QGISinstalledUI_Label1
 Var hCtl_QGISinstalledUI_installDirText
 Var hCtl_QGISinstalledUI_localCbx
@@ -29,6 +30,12 @@ Function fnc_QGISinstalledUI_Create
   ${NSD_CreateGroupBox} 7.9u 19.69u 280.41u 101.54u "Type van installatie"
   Pop $hCtl_QGISinstalledUI_typeOfInstallBox
   
+  ; === manualCbx (type: RadioButton) ===
+  ${NSD_CreateRadioButton} 11.85u 71.38u 255.39u 13.54u "Stel zelf de locatie in, Waarschuwing: doe dit enkel als weet wat je doet."
+  Pop $hCtl_QGISinstalledUI_manualCbx
+  ${NSD_AddStyle} $hCtl_QGISinstalledUI_manualCbx ${WS_GROUP}
+  ${NSD_OnClick} $hCtl_QGISinstalledUI_manualCbx setInstallDirManual
+  
   ; === Label1 (type: Label) ===
   ${NSD_CreateLabel} 11.85u 93.54u 43.44u 9.85u "Doel Folder:"
   Pop $hCtl_QGISinstalledUI_Label1
@@ -42,14 +49,13 @@ Function fnc_QGISinstalledUI_Create
   SendMessage $hCtl_QGISinstalledUI_installDirText ${EM_SETREADONLY} 1 0
   
   ; === localCbx (type: RadioButton) ===
-  ${NSD_CreateRadioButton} 11.85u 31.38u 194.84u 22.77u "Installeer alleen voor mij"
+  ${NSD_CreateRadioButton} 11.85u 31.38u 194.84u 14.77u "Installeer alleen voor mij"
   Pop $hCtl_QGISinstalledUI_localCbx
-  ${NSD_AddStyle} $hCtl_QGISinstalledUI_localCbx ${WS_GROUP}
   ${NSD_OnClick} $hCtl_QGISinstalledUI_localCbx setInstallDirLocal
   ${NSD_Check} $hCtl_QGISinstalledUI_localCbx
   
   ; === globalCbx (type: RadioButton) ===
-  ${NSD_CreateRadioButton} 11.85u 57.85u 194.84u 23.38u "Probeer te installeren voor alle gebruikers"
+  ${NSD_CreateRadioButton} 11.85u 49.85u 194.84u 17.85u "Probeer te installeren voor alle gebruikers"
   Pop $hCtl_QGISinstalledUI_globalCbx
   ${NSD_OnClick} $hCtl_QGISinstalledUI_globalCbx setInstallDirGlobal
   

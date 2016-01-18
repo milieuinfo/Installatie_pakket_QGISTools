@@ -1,6 +1,9 @@
 ;Callback Functions for QGISinstalledUI
 ;Written by Kay Warrie
 
+;includes
+  !include "EnvVarUpdate.nsh"
+  
 ;Global vars
   Var _DATA_DIR
   Var _Cbx_State
@@ -47,7 +50,7 @@
 		${Else}
 		    ${NSD_Check} $hCtl_QGISinstalledUI_localCbx
 			${NSD_Uncheck} $hCtl_QGISinstalledUI_globalCbx
-			MessageBox MB_OK "Deze folder lijkt geen python plugins folder te bevatten, ben je zeker dat dit de applicatie folder van je QGIS installatie is."
+			MessageBox MB_OK "Deze folder lijkt geen python\plugins folder te bevatten, ben je zeker dat dit de applicatie folder van je QGIS installatie is."
 		${EndIf}
 	${EndIf}
 	Call updateInstallDirText
@@ -63,3 +66,26 @@
 	 Call updateInstallDirText
   FunctionEnd 
  
+ Function setInstallDirManual
+	${NSD_GetState} $hCtl_QGISinstalledUI_manualCbx $_Cbx_State
+	${If} ${BST_UNCHECKED} == $_Cbx_State
+		Return
+	${EndIf}
+ 
+	nsDialogs::SelectFolderDialog "Stel de installatie locatie van QGIS" 
+	Pop $_DATA_DIR
+	; Check A Folder Has Been Selected
+	${If} $_DATA_DIR == "error"
+		${NSD_Check} $hCtl_QGISinstalledUI_localCbx
+		${NSD_Uncheck} $hCtl_QGISinstalledUI_manualCbx
+	${ElseIf} ${FileExists} "$_DATA_DIR\python\*.*"
+		StrCpy $pluginDir "$_DATA_DIR\python\plugins"
+	${Else}
+		CreateDirectory  "$_DATA_DIR\python\plugins"
+		StrCpy $pluginDir "$_DATA_DIR\python\plugins"
+		     
+		${EnvVarUpdate} $0 "QGIS_PLUGINPATH" "P" "HKCU" "$_DATA_DIR\python\plugins"
+	${EndIf}
+ 
+	Call updateInstallDirText
+ FunctionEnd
