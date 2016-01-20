@@ -14,7 +14,7 @@ def readIni(iniFile):
     meta['name'] = config.get('general', 'name')
     meta['qgisMinimumVersion'] = config.get('general', 'qgisMinimumVersion')
     meta['description'] = config.get('general', 'description')
-    meta['about'] = config.get('general', 'about')
+    meta['about'] = "" #config.get('general', 'about')
     meta['version'] = config.get('general', 'version')
     
     meta['author'] = config.get('general', 'author')
