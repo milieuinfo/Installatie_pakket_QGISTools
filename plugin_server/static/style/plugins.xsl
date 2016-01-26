@@ -6,6 +6,7 @@
 <html>
 <head>
 <title>Qgis Plugins - LNE Repository</title>
+<link rel="shortcut icon" href="../static/icon.ico" />
 <!--link href="xsl.css" rel="stylesheet" type="text/css" /-->
 
 <style>

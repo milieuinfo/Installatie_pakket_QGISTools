@@ -1,51 +1,51 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-    <?xml-stylesheet type="text/xsl" href="/static/style/plugins.xsl" ?>
-    <plugins><pyqgis_plugin name="qlrLoader" version="0.1" plugin_id="1">
-        <description><![CDATA[ QGIS laagbestand, QLR's inladen. ]]></description>
-        <about></about>
+    <?xml-stylesheet type="text/xsl" href="../static/style/plugins.xsl" ?>
+    <plugins><pyqgis_plugin name="qlrLoader" version="0.2" plugin_id="1">
+        <description><![CDATA[ QGIS laagbestanden, QLR's inladen via een knop op de toolbalk. ]]></description>
+        <about>Ontwikkeld voor VMM.</about>
         <author_name>Kay Warrie</author_name>
-        <version>0.1</version>
-        <qgis_minimum_version>2.0</qgis_minimum_version>
+        <version>0.2</version>
+        <qgis_minimum_version>2.8</qgis_minimum_version>
         <qgis_maximum_version>2.99</qgis_maximum_version>
         <file_name>qlrLoader.zip</file_name>
-        <download_url>http://localhost:8000/download\qlrLoader.zip</download_url>
-        <create_date>2016-01-20T09:03:14.120000</create_date>
-        <update_date>2016-01-20T09:03:14.120000</update_date>
-        <experimental>True</experimental>
+        <download_url>https://oefen.mercator.vlaanderen.be/qgis-plugins/download/qlrLoader.zip</download_url>
+        <create_date>2016-01-26T14:26:00.318000</create_date>
+        <update_date>2016-01-26T14:26:00.318000</update_date>
+        <experimental>False</experimental>
         <deprecated>False</deprecated>
         <homepage>http://www.milieuinfo.be/</homepage>
         <tracker>https://github.com/milieuinfo/qlrLoader/issues</tracker>
         <repository>https://github.com/milieuinfo/qlrLoader</repository>
         <tags>qlr</tags>
-    </pyqgis_plugin><pyqgis_plugin name="Spatial Subset Query tool" version="1.3" plugin_id="2">
-        <description><![CDATA[ EN: Make a spatial query on postgis database that selects a subset from a dataset based on the intersection with a geometry from an other preselected dataset in the same database. NL: Maak ruimtelijke query die een subset van een dataset op selecteert op basis van de intersectie met een gepreselecteerde laag overeenkomstig bij een bepaalde waarde. ]]></description>
+    </pyqgis_plugin><pyqgis_plugin name="Spatial_Subset_Query_tool" version="1.4" plugin_id="2">
+        <description><![CDATA[ Maak ruimtelijke query die een subset van een dataset op selecteert op basis van de intersectie met een gepreselecteerde laag overeenkomstig bij een bepaalde waarde. ]]></description>
         <about></about>
         <author_name>Kay Warrie</author_name>
-        <version>1.3</version>
+        <version>1.4</version>
         <qgis_minimum_version>2.8</qgis_minimum_version>
         <qgis_maximum_version>2.99</qgis_maximum_version>
         <file_name>Spatial_Subset_Query_tool.zip</file_name>
-        <download_url>http://localhost:8000/download\Spatial_Subset_Query_tool.zip</download_url>
-        <create_date>2016-01-20T09:03:14.120000</create_date>
-        <update_date>2016-01-20T09:03:14.120000</update_date>
+        <download_url>https://oefen.mercator.vlaanderen.be/qgis-plugins/download/Spatial_Subset_Query_tool.zip</download_url>
+        <create_date>2016-01-26T14:26:00.318000</create_date>
+        <update_date>2016-01-26T14:26:00.318000</update_date>
         <experimental>False</experimental>
         <deprecated>False</deprecated>
         <homepage>http://www.milieuinfo.be/</homepage>
         <tracker>https://github.com/milieuinfo/Spatial-Subset-Query-Tool/issues</tracker>
         <repository>https://github.com/milieuinfo/Spatial-Subset-Query-Tool</repository>
         <tags>sql, postgis, databank, database, query</tags>
-    </pyqgis_plugin><pyqgis_plugin name="Stijl Laden" version="0.1" plugin_id="3">
+    </pyqgis_plugin><pyqgis_plugin name="Stijl_Laden" version="0.2" plugin_id="3">
         <description><![CDATA[ Laad een gepredefineerde stijl in de vorm van .qml-bestand. ]]></description>
-        <about></about>
+        <about>Deze tool laat toe om een .qml stijl bestand toe te passen op een ingeladen laag in QGIS. De gebruiker kan een folder instellen waar hij een reeks van QML-bestanden heeft staan. Hij kan daarna een stijl selecteren uit de lijst en de een laag om die stijl op toe te passen uit de dropdown. Of een bepaalde stijl toepasbaar op een bepaald type laag moet de gebruiker zelf bepalen.</about>
         <author_name>Kay Warrie</author_name>
-        <version>0.1</version>
+        <version>0.2</version>
         <qgis_minimum_version>2.0</qgis_minimum_version>
         <qgis_maximum_version>2.99</qgis_maximum_version>
         <file_name>Stijl_Laden.zip</file_name>
-        <download_url>http://localhost:8000/download\Stijl_Laden.zip</download_url>
-        <create_date>2016-01-20T09:03:14.120000</create_date>
-        <update_date>2016-01-20T09:03:14.120000</update_date>
-        <experimental>True</experimental>
+        <download_url>https://oefen.mercator.vlaanderen.be/qgis-plugins/download/Stijl_Laden.zip</download_url>
+        <create_date>2016-01-26T14:26:00.318000</create_date>
+        <update_date>2016-01-26T14:26:00.318000</update_date>
+        <experimental>False</experimental>
         <deprecated>False</deprecated>
         <homepage>http://www.milieuinfo.be/</homepage>
         <tracker>https://github.com/milieuinfo</tracker>

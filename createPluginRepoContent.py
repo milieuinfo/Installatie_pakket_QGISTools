@@ -14,7 +14,10 @@ def readIni(iniFile):
     meta['name'] = config.get('general', 'name')
     meta['qgisMinimumVersion'] = config.get('general', 'qgisMinimumVersion')
     meta['description'] = config.get('general', 'description')
-    meta['about'] = "" #config.get('general', 'about')
+    if config.has_option('general', 'about'):
+        meta['about'] = config.get('general', 'about')
+    else:
+        meta['about'] = ""
     meta['version'] = config.get('general', 'version')
     
     meta['author'] = config.get('general', 'author')
@@ -30,7 +33,7 @@ def readIni(iniFile):
 
 def createPluginXML(metaParams, DLsite):
     head= """<?xml version = '1.0' encoding = 'UTF-8'?>
-    <?xml-stylesheet type="text/xsl" href="/static/style/plugins.xsl" ?>
+    <?xml-stylesheet type="text/xsl" href="../static/style/plugins.xsl" ?>
     <plugins>"""
     foot = "</plugins>"
 
@@ -40,7 +43,7 @@ def createPluginXML(metaParams, DLsite):
     for metaParam in metaParams:
         count += 1
         now = datetime.datetime.now().isoformat()
-        DLpath = os.path.join(DLsite, 'download', metaParam['zip'] )
+        DLpath = DLsite + '/download/' + metaParam['zip'] 
 
         xml += """<pyqgis_plugin name="{name}" version="{version}" plugin_id="{c}">
         <description><![CDATA[ {description} ]]></description>
