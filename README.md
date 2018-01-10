@@ -27,7 +27,8 @@ createPluginServerContent.py {url_of_server}
     
 For example, if running locally on localhost:
 
-    createPluginRepoContent.py https://www.mercator.vlaanderen.be/qgis-plugins
-    
+
+    createPluginRepoContent.py https://www.mercator.vlaanderen.be/qgis-plugins 
+   
 Then just add https://www.mercator.vlaanderen.be/qgis-plugins/plugins.xml to the list of repositories in QGIS:
 Plugins > Manage and install Plugins > Settings > Plugin repositories > Add
