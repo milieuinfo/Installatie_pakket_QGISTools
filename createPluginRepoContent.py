@@ -13,6 +13,10 @@ def readIni(iniFile):
 
     meta['name'] = config.get('general', 'name')
     meta['qgisMinimumVersion'] = config.get('general', 'qgisMinimumVersion')
+    if config.has_option('general', 'qgisMaximumVersion'):
+        meta['qgisMaximumVersion'] = config.get('general', 'qgisMaximumVersion')
+    else:
+        meta['qgisMaximumVersion'] = '3.99'
     meta['description'] = config.get('general', 'description')
     if config.has_option('general', 'about'):
         meta['about'] = config.get('general', 'about')
@@ -51,7 +55,7 @@ def createPluginXML(metaParams, DLsite):
         <author_name>{author}</author_name>
         <version>{version}</version>
         <qgis_minimum_version>{qgisMinimumVersion}</qgis_minimum_version>
-        <qgis_maximum_version>2.99</qgis_maximum_version>
+        <qgis_maximum_version>{qgisMaximumVersion}</qgis_maximum_version>
         <file_name>{zip}</file_name>
         <download_url>{site}</download_url>
         <create_date>{now}</create_date>
